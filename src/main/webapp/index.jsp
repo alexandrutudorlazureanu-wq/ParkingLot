@@ -1,6 +1,6 @@
-<%@page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+    <%@page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:pageTemplate pageTitle="Parking Lot">
-    <h1>Welcome to the Parking Lot</h1>
-</t:pageTemplate>
+    <t:pageTemplate pageTitle="Parking Lot">
+        <h1>Welcome to the Parking Lot</h1>
+    </t:pageTemplate>
