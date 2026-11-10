@@ -1,18 +1,27 @@
 package com.example.parkinglot.servlets;
 
+import com.example.parkinglot.common.CarDto;
+import com.example.parkinglot.ejb.CarsBean;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.parkinglot.entities.Car;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "Cars", value = "/Cars")
 public class Cars extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<CarDto> cars  = carsBean.findAllCars();
+        request.setAttribute("cars", cars);
+
         request.setAttribute("numberOfFreeParkingSpots", 10);
         request.setAttribute("activePage", "Cars");
 
@@ -22,4 +31,8 @@ public class Cars extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
+
+
+    @Inject
+    CarsBean carsBean;
 }

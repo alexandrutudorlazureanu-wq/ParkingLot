@@ -2,56 +2,26 @@ package org.example.parkinglot.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name = "cars")
 public class Car {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(name = "license_plate", nullable = false, unique = true)
     private String licensePlate;
+
+    @Column(name = "parking_spot", nullable = false)
+    private String parkingSpot;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "owner_id", nullable = false)
-    private Car owner;
+    private User owner;
 
-    @OneToMany(mappedBy = "owner", orphanRemoval = true)
-    private List<Car> cars = new ArrayList<>();
-
-    public void setParkingSpot(String parkingSpot) {
-        this.parkingSpot = parkingSpot;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
-
-    public String getParkingSpot() {
-        return parkingSpot;
-    }
-
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    private String parkingSpot;
-
-    public List<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
-    }
-
-    public Car getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Car owner) {
-        this.owner = owner;
+    public Car() {
     }
 
     public Long getId() {
@@ -62,4 +32,27 @@ public class Car {
         this.id = id;
     }
 
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public String getParkingSpot() {
+        return parkingSpot;
+    }
+
+    public void setParkingSpot(String parkingSpot) {
+        this.parkingSpot = parkingSpot;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 }
