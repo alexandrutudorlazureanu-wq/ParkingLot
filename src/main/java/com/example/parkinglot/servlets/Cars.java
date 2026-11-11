@@ -28,10 +28,23 @@ public class Cars extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/cars.jsp").forward(request, response);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
+        String[] carIdsAsString = request.getParameterValues("car_ids");
 
+        if (carIdsAsString != null) {
+            java.util.List<Long> carIds = new java.util.ArrayList<>();
+
+            for (String carIdAsString : carIdsAsString) {
+                carIds.add(Long.parseLong(carIdAsString));
+            }
+
+            carsBean.deleteCarsByIds(carIds);
+        }
+
+        response.sendRedirect(request.getContextPath() + "/Cars");
+    }
 
     @Inject
     CarsBean carsBean;
